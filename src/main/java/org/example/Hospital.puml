@@ -1,0 +1,48 @@
+@startuml
+
+Paciente "1" -- "*" Consulta
+Medico "1" -- "*" Consulta
+Medico "*" -- "1" Departamento
+Enfermeiro "*" -- "1" Departamento
+Medico <|-- Pessoa
+Enfermeiro <|-- Pessoa
+Paciente <|-- Pessoa
+
+Consulta : Date data
+Consulta : Time horario
+Consulta : String sala
+Consulta : String descricao
+Consulta : agendarConsulta();
+Consulta : cancelarConsulta();
+
+Pessoa : String nome
+Pessoa : String email
+Pessoa : String telefone
+Pessoa : seCadastrar();
+
+Paciente : String prontuario
+Paciente : String historicoMedico
+Paciente : String alergias
+Paciente : acessarHistoricoDeConsultas();
+Paciente : solicitarExame();
+
+Medico : String CRM
+Medico : String especialidade
+Medico : prescreverMedicamento();
+Medico : realizarConsulta();
+
+Enfermeiro : String COREN
+Enfermeiro : administrarMedicamento();
+Enfermeiro : auxiliarEmProcedimentos();
+
+Departamento : String nome
+Departamento : String localizacao
+
+Leito "1" -- "*" Paciente
+Leito : int numero
+Leito : String tipo
+Leito : Boolean disponivel
+Leito : reservarLeito();
+Leito : liberarLeito();
+
+@enduml
