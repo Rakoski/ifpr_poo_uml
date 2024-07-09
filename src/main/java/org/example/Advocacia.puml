@@ -1,0 +1,39 @@
+@startuml
+
+Advogado "1" -- "*" Caso
+Cliente "1" -- "*" Caso
+Documento "*" -- "1" Caso
+Agendamento "1" -- "*" Advogado
+
+Cliente : String nome
+Cliente : String CPF
+Cliente : String endereco
+Cliente : cadastrarCliente();
+Cliente : atualizarDados();
+
+Caso : int numeroProcesso
+Caso : String status
+Caso : Date dataAbertura
+Caso : String descricao
+Caso : acessarInformacoesCaso();
+Caso : atualizarStatusCaso();
+
+Documento : String tipo
+Documento : Date dataEmissao
+Documento : String conteudo
+Documento : acessarDocumento();
+Documento : enviarDocumento();
+
+Advogado : String OAB
+Advogado : String especialidade
+Advogado : registrarHorasTrabalhadas();
+Advogado : gerenciarCasos();
+Advogado : colaborarComColegas();
+
+Agendamento : Date data
+Agendamento : Time horario
+Agendamento : String tipo
+Agendamento : agendarCompromisso();
+Agendamento : cancelarCompromisso();
+
+@enduml
