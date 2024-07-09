@@ -1,0 +1,38 @@
+@startuml
+
+Usuario "1" -- "*" Reserva
+Voo "1" -- "*" Reserva
+Funcionario "*" -- "1" Voo
+Funcionario <|-- Usuario
+Cliente <|-- Usuario
+
+Voo : String companhiaAerea
+Voo : Time horarioPartida
+Voo : Time horarioChegada
+Voo : String destino
+Voo : Double preco
+Voo : ArrayList<Funcionario> funcionario
+Voo : pesquisarVoos();
+Voo : selecionarVoo();
+
+Usuario : String nome
+Usuario : String email
+Usuario : String telefone
+Usuario : Boolean ehFuncionario
+Usuario : Funcionario funcionario
+
+Reserva : Usuario usuario
+Reserva : Voo voo
+Reserva : int numeroAssentos
+Reserva : Date dataReserva
+Reserva : adicionarServicosExtras();
+Reserva : receberConfirmacaoEmail();
+Reserva : gerenciarReserva();
+
+Funcionario : String nome
+Funcionario : String setor
+
+Cliente : String nome
+Cliente : int codigoCliente
+
+@enduml
