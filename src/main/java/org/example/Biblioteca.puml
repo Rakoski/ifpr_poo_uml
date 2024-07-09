@@ -1,0 +1,39 @@
+@startuml
+
+Livro "1" -- "1" Emprestimo
+Usuario "1" -- "*" Emprestimo
+Funcionario <|-- Usuario
+Aluno <|-- Usuario
+
+Livro : String titulo
+Livro : String categoria
+Livro : String editora
+Livro : String autor
+Livro : fitrarPorAutor();
+Livro : fitrarPorEditora();
+Livro : fitrarPorCategoria();
+Livro : fitrarPorTitulo();
+
+Usuario : String nome
+Usuario : String data_nascimento
+Usuario : Boolean ehFuncionario
+Usuario : Funcionario funcionario
+
+Emprestimo : Usuario usuario
+Emprestimo : Livro livro
+Emprestimo : Date dataRetirada
+Emprestimo : Data dataDevolucao
+Emprestimo : terminarEmprestimo();
+Emprestimo : renovarEmprestimo();
+Emprestimo : realizarEmprestimo();
+Emprestimo : gerarRelatoriosEstatisticos();
+
+Funcionario : String nome
+Funcionario : String setor
+Funcionario : String profissao
+
+Aluno : String nome
+Aluno : int periodo
+Aluno : Date dataFormatura
+
+@enduml
