@@ -28,6 +28,7 @@ Reserva : Date dataReserva
 Reserva : adicionarServicosExtras();
 Reserva : receberConfirmacaoEmail();
 Reserva : gerenciarReserva();
+Reserva : reservarCliente();
 
 Funcionario : String nome
 Funcionario : String setor
