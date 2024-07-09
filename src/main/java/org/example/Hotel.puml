@@ -1,0 +1,46 @@
+@startuml
+
+Hospede "1" -- "*" Reserva
+Quarto "1" -- "*" Reserva
+Funcionario <|-- Pessoa
+Hospede <|-- Pessoa
+
+Quarto : String tipo
+Quarto : Boolean disponivel
+Quarto : Double preco
+Quarto : verificarDisponibilidade();
+Quarto : reservarQuarto();
+
+Pessoa : String nome
+Pessoa : String email
+Pessoa : String telefone
+
+Hospede : String documento
+Hospede : Boolean RealizandoCheckInCheckOut # pra ninguem tomar o quarto
+Hospede : realizarReservaOnline();
+Hospede : solicitarServico();
+Hospede : acessarInformacoesServicos();
+
+Reserva : Hospede hospede
+Reserva : Quarto quarto
+Reserva : Date dataCheckIn
+Reserva : Date dataCheckOut
+Reserva : adicionarServicosExtras();
+Reserva : confirmarReserva();
+Reserva : cancelarReserva();
+
+Funcionario : String matricula
+Funcionario : String profissao
+Funcionario : gerenciarReservas();
+Funcionario : realizarCheckIn();
+Funcionario : realizarCheckOut();
+
+Financeiro : calcularReceitas();
+Financeiro : calcularDespesas();
+Financeiro : emitirRelatoriosFinanceiros();
+
+Servico : String descricao
+Servico : Double custo
+Servico : solicitarServico();
+
+@enduml
