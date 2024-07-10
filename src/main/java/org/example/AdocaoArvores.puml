@@ -1,0 +1,45 @@
+@startuml
+
+class Arvore {
+    String especie
+    String localizacao
+    String estadoSaude
+    String descricao
+}
+
+class Adotante {
+    String nome
+    String email
+    String telefone
+    visualizarArvores();
+    solicitarAdocao();
+    registrarAtividade();
+}
+
+class Adocao {
+    Arvore arvore
+    Adotante adotante
+    Date dataAdocao
+    registrarCrescimento();
+    atualizarEstado();
+}
+
+class AtividadeManutencao {
+    String tipo
+    Date data
+    String descricao
+}
+
+class Evento {
+    String nome
+    Date data
+    String descricao
+    promoverConscientizacao();
+}
+
+Arvore "1" -- "*" Adocao
+Adotante "1" -- "*" Adocao
+Adocao "1" -- "*" AtividadeManutencao
+Adotante "1" -- "*" Evento
+
+@enduml
