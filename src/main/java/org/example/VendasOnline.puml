@@ -1,0 +1,73 @@
+@startuml
+
+Cliente "1" -- "*" Pedido
+Produto "1" -- "*" ItemPedido
+Pedido "*" -- "1" Carrinho
+Pedido -- "*" Pagamento
+Produto "*" -- "1" Estoque
+Pedido "*" -- "*" Entrega
+Pedido "*" -- "*" ItemPedido
+
+class Cliente {
+  String nome
+  String email
+  String endereco
+  String telefone
+  visualizarProdutos();
+  adicionarProdutoCarrinho();
+  efetuarPagamento();
+  rastrearPedido();
+}
+
+class Produto {
+  String nome
+  String descricao
+  Double preco
+  verificarDisponibilidade();
+}
+
+class Pedido {
+  Date dataPedido
+  Cliente cliente
+  List<ItemPedido> itens
+  String status
+  calcularTotal();
+  atualizarStatus();
+}
+
+class ItemPedido {
+  Produto produto
+  int quantidade
+  calcularSubtotal();
+}
+
+class Carrinho {
+  List<ItemPedido> itens
+  adicionarItem();
+  removerItem();
+  calcularTotal();
+}
+
+class Pagamento {
+  Double valor
+  Date dataPagamento
+  String metodoPagamento
+  confirmarPagamento();
+}
+
+class Estoque {
+  Produto produto
+  int quantidade
+  adicionarProduto();
+  removerProduto();
+}
+
+class Entrega {
+  Pedido pedido
+  String enderecoEntrega
+  Date dataEstimada
+  String status
+  atualizarStatusEntrega();
+}
+
+@enduml
