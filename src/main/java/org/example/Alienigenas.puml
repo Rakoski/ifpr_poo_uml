@@ -1,68 +1,70 @@
 @startuml
-    class LaudoMedico{
-        float temperatura
-        float peso
-        float altura
-    }
 
-    class Servico {
-        String descricao
-        String nome
-        String telefone
-        String tipo
-    }
+Turista "1" -- "1" Endereco
+Especie "1" -- "1" Turista
+Turista "1" -- "*" Reserva
+Turista "1" -- "*" RegistroViagem
+Reserva "1" -- "1" Acomodacao
+Turista "1" -- "*" Passeio
+Passeio "1" -- "1" PontoTuristico
+PontoTuristico "*" -- "1" Planeta
+Turista "1" -- "*" Servico
 
-    class Reserva {
-        Date dataPrevista
-        float valor
-    }
+class Servico {
+    String descricao
+    String nome
+    String telefone
+    String tipo
+}
 
-    class Acomodacao {
-        float valor
-        String descricao
-    }
+class Reserva {
+    Date dataPrevista
+    float valor
+}
 
-    class RegistroViagem {
-        Date dataChegada
-        Date dataPartida
-        Date dataPrevistaPartida
-    }
+class Acomodacao {
+    float valor
+    String descricao
+}
 
-    class Passeio {
-        String descricao
-        String nome
-        String valor
-    }
+class RegistroViagem {
+    Date dataChegada
+    Date dataPartida
+    Date dataPrevistaPartida
+}
 
-    class Endereco{
-        String pais
-        String latitude
-        String longitude
-    }
+class Passeio {
+    String descricao
+    String nome
+    String valor
+}
 
-    class PontoTuristico{
-        String descricao
-        String imagem
-        String nome
-        String valor
-    }
+class Endereco {
+    String pais
+    String latitude
+    String longitude
+}
 
-    class Planeta{
-        String nome
-        String constelacao
-    }
+class PontoTuristico {
+    String descricao
+    String imagem
+    String nome
+    String valor
+}
 
-    class Especie{
-        String nome
-        String descricao
-    }
+class Planeta {
+    String nome
+    String constelacao
+}
 
-    class Turista{
-        String nome
-        String registroInterplanetario
-        Endereco endereco
-    }
+class Especie {
+    String nome
+    String descricao
+}
 
-    Turista <-> Endereco
-
+class Turista {
+    String nome
+    String registroInterplanetario
+    Endereco endereco
+}
 @enduml
