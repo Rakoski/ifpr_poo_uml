@@ -1,0 +1,73 @@
+@startuml
+
+Membro "1" -- "*" Reserva
+Instrutor "1" -- "*" Aula
+Aula "*" -- "*" Reserva
+Membro "1" -- "*" Mensalidade
+Instrutor "1" -- "*" PlanoTreinamento
+PlanoTreinamento "1" -- "*" Exercicio
+
+class Membro {
+  String nome
+  String email
+  String telefone
+  Date dataInscricao
+  acessarAulas();
+  reservarAula();
+  verificarProgresso();
+}
+
+class Instrutor {
+  String nome
+  String qualificacao
+  List<Aula> aulas
+  criarPlanoTreinamento();
+  monitorarDesempenhoAlunos();
+}
+
+class Aula {
+  String titulo
+  String descricao
+  Date horario
+  Instrutor instrutor
+  List<Reserva> reservas
+  agendarAula();
+  cancelarAula();
+}
+
+class Reserva {
+  Membro membro
+  Aula aula
+  Date dataReserva
+  confirmarPresenca();
+  cancelarReserva();
+}
+
+class Mensalidade {
+  Membro membro
+  Double valor
+  Date dataVencimento
+  efetuarPagamento();
+  gerarRelatorioFinanceiro();
+}
+
+class PlanoTreinamento {
+  Instrutor instrutor
+  Membro membro
+  List<Exercicio> exercicios
+  Integer pesoComeco
+  Integer pesoRelatorioDesempenho NULL
+  criarExercicio();
+  modificarExercicio();
+  gerarRelatorioDesempenho();
+}
+
+class Exercicio {
+  String nome
+  String descricao
+  int repeticoes
+  int series
+  Double carga
+}
+
+@enduml
