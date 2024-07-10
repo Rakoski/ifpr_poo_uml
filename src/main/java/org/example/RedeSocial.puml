@@ -1,0 +1,62 @@
+@startuml
+
+Usuario "1" -- "*" Publicacao
+Usuario "1" -- "*" Comentario
+Usuario "1" -- "*" Mensagem
+Publicacao "1" -- "*" Curtida
+Publicacao "1" -- "*" Comentario
+Mensagem "1" -- "1" Conversa
+
+class Usuario {
+  String nome
+  String email
+  String senha
+  String fotoPerfil
+  String bio
+  List<String> interesses
+  enviarMensagem();
+  postarConteudo();
+  modificarPerfil();
+}
+
+class Publicacao {
+  String conteudo
+  Date dataHora
+  Usuario autor
+  List<Curtida> curtidas
+  List<Comentario> comentarios
+  editarPublicacao();
+  deletarPublicacao();
+}
+
+class Comentario {
+  String texto
+  Usuario autor
+  Date dataHora
+  editarComentario();
+  deletarComentario();
+}
+
+class Mensagem {
+  String texto
+  Usuario remetente
+  Usuario destinatario
+  Date dataHora
+  deletarMensagem();
+}
+
+class Curtida {
+  Usuario autor
+  Publicacao publicacao
+  Date dataHora
+  Date deletarCurtida();
+}
+
+
+class Conversa {
+  List<Mensagem> mensagens
+  adicionarMensagem();
+  deletarMensagem();
+}
+
+@enduml
