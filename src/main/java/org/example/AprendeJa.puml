@@ -1,0 +1,34 @@
+@startuml
+class Permissions {
+    -int id
+    -string description
+}
+
+class Address {
+        -int id
+        -string street
+        -string city
+        -string state
+        -string country
+        -string zipCode
+}
+
+class User {
+        -int id
+        -string name
+        -string email
+        -string password
+        -string profilePicture
+        -string phone
+        Address address
+        +authenticate()
+        +updateProfile()
+        +requestSupport()
+}
+
+class UserPermission {
+    -int id
+    User user
+    Permissions permission
+}
+@enduml
