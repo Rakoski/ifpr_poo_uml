@@ -5,25 +5,25 @@ class Permissions {
 }
 
 class Address {
-        -int id
-        -string street
-        -string city
-        -string state
-        -string country
-        -string zipCode
+    -int id
+    -string street
+    -string city
+    -string state
+    -string country
+    -string zipCode
 }
 
 class User {
-        -int id
-        -string name
-        -string email
-        -string password
-        -string profilePicture
-        -string phone
-        Address address
-        +authenticate()
-        +updateProfile()
-        +requestSupport()
+    -int id
+    -string name
+    -string email
+    -string password
+    -string profilePicture
+    -string phone
+    Address address
+    +authenticate()
+    +updateProfile()
+    +requestSupport()
 }
 
 class UserPermission {
@@ -31,4 +31,29 @@ class UserPermission {
     User user
     Permissions permission
 }
+
+class University {
+    -int id
+    -string name
+    -string logo
+    -string theme
+    -List~Course~ courses
+    +customizeAppearance()
+    +manageCourses()
+}
+
+
+class courses {
+    -int id
+    -string title
+    -string description
+    -double price
+    -User instructor
+    -University university
+    -List~Assessment~ assessments
+    -List~Student~ enrolledStudents
+    +enroll(Student)
+    +generateCertificate()
+}
+
 @enduml
