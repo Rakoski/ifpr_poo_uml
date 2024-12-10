@@ -1,11 +1,9 @@
 @startuml
 class Permissions {
-    -int id
     -string description
 }
 
 class Address {
-    -int id
     -string street
     -string city
     -string state
@@ -14,7 +12,6 @@ class Address {
 }
 
 class User {
-    -int id
     -string name
     -string email
     -string password
@@ -26,14 +23,7 @@ class User {
     +requestSupport()
 }
 
-class UserPermission {
-    -int id
-    User user
-    Permissions permission
-}
-
 class University {
-    -int id
     -string name
     -string logo
     -string theme
@@ -42,18 +32,82 @@ class University {
     +manageCourses()
 }
 
-
 class courses {
-    -int id
     -string title
     -string description
     -double price
     -User instructor
     -University university
+    CourseStatus status
+    CourseType type
     -List~Assessment~ assessments
+}
+
+class enrollments {
+    courses course
+    User users
     -List~Student~ enrolledStudents
-    +enroll(Student)
+    +enroll()
+}
+
+class CourseType {
+    -string name
+}
+
+class CourseStatus {
+    -string name
+}
+
+class Certificate {
+    -string hash
+    enrollments enrollment
     +generateCertificate()
 }
 
+class Assessment {
+    -string title
+    -string description
+    -int maxAttempts
+    -double passingScore
+    -DateTime dueDate
+    -List~Question~ questions
+    +calculateScore()
+    +submitAssessment()
+}
+
+class Question {
+    -string questionText
+    -double points
+    -QuestionType type
+    -List~Alternative~ alternatives
+    -Answer correctAnswer
+    +checkAnswer()
+}
+
+class Alternative {
+    -string text
+    -boolean isCorrect
+}
+
+class Answer {
+    -string studentResponse
+    -DateTime submissionTime
+    -double score
+    +grade()
+}
+
+Permissions "*" -- "*" User
+User "1" ---- "*" courses
+User "1" -- "1" enrollments
+courses "1" -- "1" enrollments
+User "1" -- "1" Address
+University "1" -- "0.." User
+courses "0..*" -- "*" University
+courses "1" -- "1" CourseType
+courses "1" -- "1" CourseStatus
+Certificate "1" -- "1" enrollments
+Assessment "1..*" -- "1" courses
+Question "1..*" -- "1" Assessment
+Alternative "1..*" -- "1" Question
+Answer "1" -- "1" Question
 @enduml
