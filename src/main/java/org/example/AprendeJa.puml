@@ -1,4 +1,5 @@
 @startuml
+' Previous classes remain the same until enrollments
 class Permissions {
     -string description
 }
@@ -41,15 +42,65 @@ class courses {
     CourseStatus status
     CourseType type
     -List~Assessment~ assessments
+    -List~Module~ modules
+    +addModule()
+    +removeModule()
+}
+
+class Module {
+    -string title
+    -string description
+    -int orderIndex
+    -List~Discipline~ disciplines
+    +addDiscipline()
+    +removeDiscipline()
+    +reorderDisciplines()
+}
+
+class Discipline {
+    -string title
+    -string description
+    -int orderIndex
+    -List~Lesson~ lessons
+    +addLesson()
+    +removeLesson()
+    +reorderLessons()
+}
+
+class Lesson {
+    -string title
+    -string description
+    -int orderIndex
+    -string content
+    -string videoUrl
+    -int durationMinutes
+    -List~Attachment~ attachments
+    +markComplete()
+}
+
+class Progress {
+    -DateTime startedAt
+    -DateTime completedAt
+    -double watchedPercentage
+    -int watchTimeSeconds
+    +markAsStarted()
+    +updateProgress()
+    +markAsCompleted()
+    +calculateProgress()
 }
 
 class enrollments {
     courses course
     User users
+    -DateTime dateOfBuy
     -List~Student~ enrolledStudents
+    -List~Progress~ progress
     +enroll()
+    +getOverallProgress()
+    +getModuleProgress()
 }
 
+' Rest of the previous classes
 class CourseType {
     -string name
 }
@@ -96,10 +147,48 @@ class Answer {
     +grade()
 }
 
+class Coupon {
+    -string code
+    -double value
+    -boolean type
+    -DateTime validUntil
+    -boolean active
+    +calculateDiscount()
+    +validate()
+}
+
+class UserCoupon {
+    -DateTime usedAt
+    -boolean used
+    +markAsUsed()
+}
+
+class Charge {
+    -string paymentId
+    -double totalAmount
+    -double discountAmount
+    -DateTime chargeDate
+    -PaymentStatus status
+    -PaymentMethod method
+    -List~ChargeItem~ items
+    +processPayment()
+    +generateInvoice()
+}
+
+class ChargeItem {
+    -double originalPrice
+    -double finalPrice
+    -double discountAmount
+    -Coupon appliedCoupon
+    courses course
+    +calculateFinalPrice()
+}
+
+' All previous relationships
 Permissions "*" -- "*" User
 User "1" ---- "*" courses
-User "1" -- "1" enrollments
-courses "1" -- "1" enrollments
+User "*" -- "*" enrollments
+courses "*" -- "*" enrollments
 User "1" -- "1" Address
 University "1" -- "0.." User
 courses "0..*" -- "*" University
@@ -110,4 +199,16 @@ Assessment "1..*" -- "1" courses
 Question "1..*" -- "1" Assessment
 Alternative "1..*" -- "1" Question
 Answer "1" -- "1" Question
+Coupon "*" -- "*" CourseType
+User "1" -- "*" UserCoupon
+Coupon "1" -- "*" UserCoupon
+User "1" -- "*" Charge
+Charge "1" -- "*" ChargeItem
+ChargeItem "0..1" -- "1" Coupon
+enrollments "1" -- "1" ChargeItem
+courses "1" -- "*" Module
+Module "1" -- "*" Discipline
+Discipline "1" -- "*" Lesson
+enrollments "1" -- "*" Progress
+Progress "1" -- "1" Lesson
 @enduml
